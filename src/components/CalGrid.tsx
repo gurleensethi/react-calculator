@@ -54,19 +54,19 @@ export default class CalGrid extends React.Component<Props> {
 
 const Container = styled.div`
   width: 400px;
-  height: 400px;
+  box-shadow: 5px 5px 10px grey;
+  border-radius: 6px;
+  overflow: hidden;
 `;
 
 const NumContainer = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
   flex-wrap: wrap;
 `;
 
 const ExpressionContainer = styled.div`
-  display: flex; 
-  justify-content: flex-end;    
+  display: flex;
+  justify-content: flex-end;
 
   & > div:first-child {
     flex-grow: 1;

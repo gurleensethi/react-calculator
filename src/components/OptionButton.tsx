@@ -19,7 +19,7 @@ const Button = styled.button`
   color: white;
   padding: 16px;
   transition: 0.2s;
-  width: 25.0%;
+  width: 25%;  
 
   &:hover {
     background: rgb(50, 50, 50);
