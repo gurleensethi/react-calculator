@@ -6,29 +6,28 @@ interface Props {
   onPress: () => void;
 }
 
-interface State {}
-
-export default class CalButton extends React.Component<Props, State> {
+export default class OptionButton extends React.Component<Props> {
   render() {
-    return <Button onClick={this.props.onPress}>{this.props.label}</Button>;
+    return <Button>{this.props.label}</Button>;
   }
 }
 
 const Button = styled.button`
+  font-size: 2rem;
   border: none;
-  padding: 24px;
-  background: darkgrey;
-  font-size: 24px;
+  background: black;
   color: white;
+  padding: 16px;
   transition: 0.2s;
   width: 25.0%;
 
   &:hover {
-    background: grey;
+    background: rgb(50, 50, 50);
     cursor: pointer;
   }
 
   &:active {
     background: orange;
+    cursor: pointer;
   }
 `;

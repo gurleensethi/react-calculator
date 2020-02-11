@@ -1,11 +1,19 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import CalButton from "./CalButton";
+import OptionButton from "./OptionButton";
 
 interface Props {}
 
 export default class CalGrid extends React.Component<Props> {
-  handleNumberClick: (num: number) => () => void = (num: number) => {
+  gridMap: string[][] = [
+    ["1", "2", "3", "+"],
+    ["4", "5", "6", "-"],
+    ["7", "8", "9", "/"],
+    [".", "0", "( )", "%"]
+  ];
+
+  handleNumberClick: (num: string) => () => void = (num: string) => {
     return () => {
       console.log(num);
     };
@@ -14,13 +22,24 @@ export default class CalGrid extends React.Component<Props> {
   render() {
     return (
       <NumContainer>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
-          <CalButton
-            label={`${num}`}
-            onPress={this.handleNumberClick(num)}
-            key={num}
-          />
-        ))}
+        {this.gridMap.map(row =>
+          row.map(num => {
+            const isNum = !!Number(num);
+            return isNum ? (
+              <CalButton
+                label={num}
+                onPress={this.handleNumberClick(num)}
+                key={num}
+              />
+            ) : (
+              <OptionButton
+                label={num}
+                onPress={this.handleNumberClick(num)}
+                key={num}
+              />
+            );
+          })
+        )}
       </NumContainer>
     );
   }
@@ -28,6 +47,7 @@ export default class CalGrid extends React.Component<Props> {
 
 const NumContainer = styled.div`
   display: flex;
-  max-width: 300px;
+  width: 400px;
+  height: 400px;
   flex-wrap: wrap;
 `;
