@@ -23,7 +23,10 @@ export default class CalGrid extends React.Component<Props> {
   render() {
     return (
       <Container>
-        <ExpressionBox expression={"2 + 4"} />
+        <ExpressionContainer>
+          <ExpressionBox expression={"2 + 4"} />
+          <OptionButton label="C" onPress={() => console.log("clear")} />
+        </ExpressionContainer>
         <NumContainer>
           {this.gridMap.map(row =>
             row.map(num => {
@@ -59,4 +62,14 @@ const NumContainer = styled.div`
   width: 100%;
   height: 100%;
   flex-wrap: wrap;
+`;
+
+const ExpressionContainer = styled.div`
+  display: flex; 
+  justify-content: flex-end;    
+
+  & > div:first-child {
+    flex-grow: 1;
+    padding-right: 16px;
+  }
 `;
