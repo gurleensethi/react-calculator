@@ -1,0 +1,21 @@
+import * as React from "react";
+import styled from "@emotion/styled";
+
+interface Props {
+  expression: string;
+}
+
+export default class ExpressionBox extends React.Component<Props> {
+  render() {
+    return <Container>{this.props.expression}</Container>;
+  }
+}
+
+const Container = styled.div`
+  background-color: grey;
+  padding: 16px;
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  justify-content: flex-end;
+`;
