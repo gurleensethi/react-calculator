@@ -14,7 +14,13 @@ const App: React.FunctionComponent<{}> = props => {
       <footer>
         <FooterText>
           Check out the source on{" "}
-          <a target="_blank" href="https://github.com/gurleensethi/react-calculator/">GitHub</a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/gurleensethi/react-calculator/"
+          >
+            GitHub
+          </a>
         </FooterText>
       </footer>
     </Container>
