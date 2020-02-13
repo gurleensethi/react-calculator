@@ -16,6 +16,7 @@ const Container = styled.div`
   color: white;
   font-size: 2rem;
   display: flex;
+  padding: 16px;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
 `;

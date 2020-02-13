@@ -1,28 +1,11 @@
 import * as React from "react";
-import "./styles.css";
 import CalGrid from "./components/CalGrid";
 import styled from "@emotion/styled";
 
 const App: React.FunctionComponent<{}> = props => {
   return (
     <Container>
-      <header>
-        <Title>React Calculator</Title>
-        <Subtitle>(React + Redux + Typescript)</Subtitle>
-      </header>
       <CalGrid />
-      <footer>
-        <FooterText>
-          Check out the source on{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/gurleensethi/react-calculator/"
-          >
-            GitHub
-          </a>
-        </FooterText>
-      </footer>
     </Container>
   );
 };

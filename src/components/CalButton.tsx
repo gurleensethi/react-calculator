@@ -4,24 +4,35 @@ import styled from "@emotion/styled";
 interface Props {
   label: string;
   onPress: () => void;
+  backgroundColor?: string;
 }
 
 interface State {}
 
 export default class CalButton extends React.Component<Props, State> {
+  static defaultProps = {
+    backgroundColor: "darkgrey"
+  };
+
   render() {
-    return <Button onClick={this.props.onPress}>{this.props.label}</Button>;
+    return (
+      <Button
+        backgroundColor={this.props.backgroundColor}
+        onClick={this.props.onPress}
+      >
+        {this.props.label}
+      </Button>
+    );
   }
 }
 
-const Button = styled.button`
+const Button = styled.button<{ backgroundColor: string | undefined }>`
   border: none;
-  padding: 24px;
-  background: darkgrey;
   font-size: 2rem;
   color: white;
   transition: 0.2s;
-  width: 25.0%;
+  width: 25%;
+  padding: 16px;
 
   &:hover {
     background: grey;
@@ -31,4 +42,6 @@ const Button = styled.button`
   &:active {
     background: orange;
   }
+
+  background-color: ${props => props.backgroundColor};
 `;
