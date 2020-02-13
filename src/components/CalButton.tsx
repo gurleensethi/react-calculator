@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 interface Props {
   label: string;
   onPress: () => void;
-  backgroundColor?: string;
+  backgroundColor: string;
 }
 
 interface State {}
@@ -26,7 +26,7 @@ export default class CalButton extends React.Component<Props, State> {
   }
 }
 
-const Button = styled.button<{ backgroundColor: string | undefined }>`
+const Button = styled.button<{ backgroundColor: string }>`
   border: none;
   font-size: 2rem;
   color: white;

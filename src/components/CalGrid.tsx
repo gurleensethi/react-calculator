@@ -29,8 +29,7 @@ export default class CalGrid extends React.Component<Props> {
         </ExpressionContainer>
         <NumContainer>
           {this.gridMap.map(row =>
-            row.map(num => {
-              const isNum = !!Number(num);
+            row.map(num => {              
               return (
                 <CalButton
                   label={num}
