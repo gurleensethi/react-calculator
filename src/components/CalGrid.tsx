@@ -8,10 +8,11 @@ interface Props {}
 
 export default class CalGrid extends React.Component<Props> {
   gridMap: string[][] = [
-    ["1", "2", "3", "+"],
-    ["4", "5", "6", "-"],
-    ["7", "8", "9", "/"],
-    [".", "0", "( )", "%"]
+    ["AC", "(", ")", "="],
+    ["1", "2", "3", "%"],
+    ["4", "5", "6", "x"],
+    ["7", "8", "9", "+"],
+    [".", "0", ".", "-"]
   ];
 
   handleNumberClick: (num: string) => () => void = (num: string) => {
@@ -29,6 +30,7 @@ export default class CalGrid extends React.Component<Props> {
         <NumContainer>
           {this.gridMap.map(row =>
             row.map(num => {
+              const isNum = !!Number(num);
               return (
                 <CalButton
                   label={num}
