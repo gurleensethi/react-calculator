@@ -3,37 +3,62 @@ import styled from "@emotion/styled";
 import CalButton from "./CalButton";
 import ExpressionBox from "./ExpressionBox";
 import Breakpoints from "../common/breakpoints";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../store";
+import { Dispatch } from "redux";
+import { addSymbol } from "../store/expression/actions";
 
-interface Props {}
+interface OwnProps {}
 
-export default class CalGrid extends React.Component<Props> {
+const mapStateToProps = (state: RootState, props: OwnProps) => {
+  return {
+    expression: state.expression.value
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch, props: OwnProps) => {
+  return {
+    addSymbol: (symbol: string) => dispatch(addSymbol(symbol))
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+class CalGrid extends React.Component<OwnProps & PropsFromRedux> {
   gridMap: string[][] = [
     ["AC", "(", ")", "="],
     ["1", "2", "3", "%"],
     ["4", "5", "6", "x"],
     ["7", "8", "9", "+"],
-    [".", "0", ".", "-"]
+    [" ", "0", ".", "-"]
   ];
 
-  handleNumberClick: (num: string) => () => void = (num: string) => {
-    return () => {
-      console.log(num);
-    };
+  handleNumberClick = (symbol: string) => {
+    switch (symbol) {
+      case "AC":
+        break;
+      case "=":
+        break;
+      default:
+        this.props.addSymbol(symbol);
+    }
   };
 
   render() {
     return (
       <Container>
         <ExpressionContainer>
-          <ExpressionBox expression={"2 + 4"} />
+          <ExpressionBox expression={this.props.expression} />
         </ExpressionContainer>
         <NumContainer>
           {this.gridMap.map(row =>
-            row.map(num => {              
+            row.map(num => {
               return (
                 <CalButton
                   label={num}
-                  onPress={this.handleNumberClick(num)}
+                  onPress={() => this.handleNumberClick(num)}
                   key={num}
                 />
               );
@@ -74,3 +99,5 @@ const ExpressionContainer = styled.div`
     padding-right: 16px;
   }
 `;
+
+export default connector(CalGrid);

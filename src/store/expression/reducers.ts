@@ -6,23 +6,21 @@ import {
 } from "./types";
 
 const initialState: ExpressionState = {
-  expression: ""
+  value: ""
 };
 
 export function expressionReducer(
   state: ExpressionState = initialState,
   action: ExpressionActionTypes
 ): ExpressionState {
+  console.log(state, action);
   switch (action.type) {
     case ADD_SYMBOL:
-      return { expression: state.expression + action.symbol };
+      return { value: state.value + action.symbol };
     case REMOVE_SYMBOL:
-      const { expression } = state;
+      const { value } = state;
       return {
-        expression:
-          expression.length > 0
-            ? expression.substr(0, expression.length - 1)
-            : expression
+        value: value.length > 0 ? value.substr(0, value.length - 1) : value
       };
     default:
       return state;

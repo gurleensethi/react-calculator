@@ -1,5 +1,5 @@
 export interface ExpressionState {
-  expression: string;
+  value: string;
 }
 
 export const ADD_SYMBOL = "ADD_SYMBOL";
