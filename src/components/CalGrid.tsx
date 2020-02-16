@@ -5,10 +5,11 @@ import ExpressionBox from "./ExpressionBox";
 import ResultBox from "./ResultBox";
 import Breakpoints from "../common/breakpoints";
 import { connect, ConnectedProps } from "react-redux";
-import { RootState } from "../store";
-import { handleAddSymbol } from "../store/expression/actions";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
+import { RootState, AppDispatch } from "../store";
+import {
+  handleAddSymbol,
+  handleExpressionEqualsResult
+} from "../store/expression/actions";
 
 interface OwnProps {}
 
@@ -19,12 +20,10 @@ const mapStateToProps = (state: RootState, props: OwnProps) => {
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: ThunkDispatch<RootState, unknown, Action>,
-  props: OwnProps
-) => {
+const mapDispatchToProps = (dispatch: AppDispatch, props: OwnProps) => {
   return {
-    addSymbol: (symbol: string) => dispatch(handleAddSymbol(symbol))
+    addSymbol: (symbol: string) => dispatch(handleAddSymbol(symbol)),
+    handleEqualsPress: () => dispatch(handleExpressionEqualsResult())
   };
 };
 
@@ -49,6 +48,7 @@ class CalGrid extends React.Component<OwnProps & PropsFromRedux> {
         this.props.addSymbol("*");
         break;
       case "=":
+        this.props.handleEqualsPress();
         break;
       default:
         this.props.addSymbol(symbol);
