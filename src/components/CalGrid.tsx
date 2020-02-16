@@ -2,23 +2,29 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import CalButton from "./CalButton";
 import ExpressionBox from "./ExpressionBox";
+import ResultBox from "./ResultBox";
 import Breakpoints from "../common/breakpoints";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../store";
-import { Dispatch } from "redux";
-import { addSymbol } from "../store/expression/actions";
+import { handleAddSymbol } from "../store/expression/actions";
+import { ThunkDispatch } from "redux-thunk";
+import { Action } from "redux";
 
 interface OwnProps {}
 
 const mapStateToProps = (state: RootState, props: OwnProps) => {
   return {
-    expression: state.expression.value
+    expression: state.expression.value,
+    result: state.result.result
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch, props: OwnProps) => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<RootState, unknown, Action>,
+  props: OwnProps
+) => {
   return {
-    addSymbol: (symbol: string) => dispatch(addSymbol(symbol))
+    addSymbol: (symbol: string) => dispatch(handleAddSymbol(symbol))
   };
 };
 
@@ -39,6 +45,9 @@ class CalGrid extends React.Component<OwnProps & PropsFromRedux> {
     switch (symbol) {
       case "AC":
         break;
+      case "x":
+        this.props.addSymbol("*");
+        break;
       case "=":
         break;
       default:
@@ -47,10 +56,12 @@ class CalGrid extends React.Component<OwnProps & PropsFromRedux> {
   };
 
   render() {
+    const { result, expression } = this.props;
     return (
       <Container>
         <ExpressionContainer>
-          <ExpressionBox expression={this.props.expression} />
+          <ResultBox result={result} />
+          <ExpressionBox expression={expression} />
         </ExpressionContainer>
         <NumContainer>
           {this.gridMap.map(row =>
@@ -92,12 +103,10 @@ const NumContainer = styled.div`
 
 const ExpressionContainer = styled.div`
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
-
-  & > div:first-child {
-    flex-grow: 1;
-    padding-right: 16px;
-  }
+  background-color: black;
+  justify-content: flex-end;
 `;
 
 export default connector(CalGrid);

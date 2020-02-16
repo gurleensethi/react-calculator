@@ -13,7 +13,6 @@ export function expressionReducer(
   state: ExpressionState = initialState,
   action: ExpressionActionTypes
 ): ExpressionState {
-  console.log(state, action);
   switch (action.type) {
     case ADD_SYMBOL:
       return { value: state.value + action.symbol };

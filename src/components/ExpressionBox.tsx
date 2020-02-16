@@ -11,8 +11,7 @@ export default class ExpressionBox extends React.Component<Props> {
   }
 }
 
-const Container = styled.div`
-  background-color: black;
+const Container = styled.div`  
   color: white;
   font-size: 2rem;
   display: flex;
