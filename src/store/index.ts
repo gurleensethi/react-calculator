@@ -1,12 +1,15 @@
-import { combineReducers, Action } from "redux";
+import { combineReducers, Action, applyMiddleware } from "redux";
 import { expressionReducer } from "./expression/reducers";
 import { resultReducer } from "./result/reducers";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
+import logger from "./middleware/logger.middleware";
 
 export const rootReducer = combineReducers({
   expression: expressionReducer,
   result: resultReducer
 });
+
+export const middleware = applyMiddleware(thunk, logger);
 
 export type RootState = ReturnType<typeof rootReducer>;
 
