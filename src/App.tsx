@@ -20,25 +20,4 @@ const Container = styled.div`
   background: rgb(220, 220, 220);
 `;
 
-const Title = styled.h1`
-  padding: 0;
-  margin: 0;
-  margin-bottom: 8px;
-`;
-
-const Subtitle = styled.h3`
-  padding: 0;
-  margin: 0;
-  margin-bottom: 40px;
-  color: grey;
-  font-weight: normal;
-`;
-
-const FooterText = styled.h3`
-  padding: 0;
-  margin: 0;
-  margin-top: 40px;
-  font-weight: normal;
-`;
-
 export default App;

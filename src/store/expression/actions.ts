@@ -8,7 +8,7 @@ import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState, AppThunkAction, AppDispatch } from "../index";
 import * as math from "mathjs";
-import { updateResult } from "../result/actions";
+import { updateResult, updateResultValidation } from "../result/actions";
 
 export const handleAddSymbol = (
   symbol: string
@@ -16,15 +16,19 @@ export const handleAddSymbol = (
   dispatch: Dispatch,
   getState: () => RootState
 ) => {
-  const expression = getState().expression.value + symbol;
-  let result: string;
+  const state = getState();
+  const expression = state.expression.value + symbol;
+  let result: string = state.result.result;
+  let isValid: boolean;
   try {
     result = String(math.evaluate(expression));
+    isValid = true;
   } catch (error) {
-    result = "Invalid Expression";
+    isValid = false;
   }
   dispatch(addSymbol(symbol));
   dispatch(updateResult(result));
+  dispatch(updateResultValidation(isValid));
 };
 
 export function addSymbol(symbol: string): ExpressionActionTypes {

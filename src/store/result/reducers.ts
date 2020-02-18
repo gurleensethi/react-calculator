@@ -1,7 +1,13 @@
-import { ResultState, ResultActionTypes, UPDATE_RESULT } from "./types";
+import {
+  ResultState,
+  ResultActionTypes,
+  UPDATE_RESULT,
+  UPDATE_RESULT_VALIDATION
+} from "./types";
 
 const initialState: ResultState = {
-  result: ""
+  result: "",
+  isValid: true
 };
 
 export function resultReducer(
@@ -10,7 +16,9 @@ export function resultReducer(
 ): ResultState {
   switch (action.type) {
     case UPDATE_RESULT:
-      return { result: action.result };
+      return { ...state, result: action.result };
+    case UPDATE_RESULT_VALIDATION:
+      return { ...state, isValid: action.isValid };
     default:
       return state;
   }
