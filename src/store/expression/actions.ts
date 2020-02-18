@@ -11,27 +11,6 @@ import { RootState, AppThunkAction, AppDispatch } from "../index";
 import * as math from "mathjs";
 import { updateResult, updateResultValidation } from "../result/actions";
 
-export const handleAddSymbol = (
-  symbol: string
-): ThunkAction<void, RootState, unknown, ExpressionActionTypes> => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
-  const state = getState();
-  const expression = state.expression.value + symbol;
-  let result: string = state.result.result;
-  let isValid: boolean;
-  try {
-    result = String(math.evaluate(expression));
-    isValid = true;
-  } catch (error) {
-    isValid = false;
-  }
-  dispatch(addSymbol(symbol));
-  dispatch(updateResult(result));
-  dispatch(updateResultValidation(isValid));
-};
-
 export function addSymbol(symbol: string): ExpressionActionTypes {
   return {
     type: ADD_SYMBOL,
@@ -57,6 +36,50 @@ export function clearExpression(): ExpressionActionTypes {
     type: CLEAR_EXPRESSION
   };
 }
+
+export const handleRemoveSymbol = (): AppThunkAction<ExpressionActionTypes> => (
+  dispatch: Dispatch,
+  getState: () => RootState
+) => {
+  const state = getState();
+  let expression = state.expression.value;
+  if (expression.length === 0) {
+    return;
+  }
+  expression = expression.substr(0, expression.length - 1);
+  let result: string = state.result.result;
+  let isValid: boolean;
+  try {
+    result = String(math.evaluate(expression) || "");
+    isValid = true;
+  } catch (error) {
+    isValid = false;
+  }
+  dispatch(removeSymbol());
+  dispatch(updateResult(result));
+  dispatch(updateResultValidation(isValid));
+};
+
+export const handleAddSymbol = (
+  symbol: string
+): AppThunkAction<ExpressionActionTypes> => (
+  dispatch: Dispatch,
+  getState: () => RootState
+) => {
+  const state = getState();
+  const expression = state.expression.value + symbol;
+  let result: string = state.result.result;
+  let isValid: boolean;
+  try {
+    result = String(math.evaluate(expression));
+    isValid = true;
+  } catch (error) {
+    isValid = false;
+  }
+  dispatch(addSymbol(symbol));
+  dispatch(updateResult(result));
+  dispatch(updateResultValidation(isValid));
+};
 
 export const handleExpressionEqualsResult = (): AppThunkAction<ExpressionActionTypes> => (
   dispatch: AppDispatch,
