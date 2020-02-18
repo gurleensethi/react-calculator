@@ -6,7 +6,6 @@ import {
   CLEAR_EXPRESSION
 } from "./types";
 import { Dispatch } from "redux";
-import { ThunkAction } from "redux-thunk";
 import { RootState, AppThunkAction, AppDispatch } from "../index";
 import * as math from "mathjs";
 import { updateResult, updateResultValidation } from "../result/actions";
