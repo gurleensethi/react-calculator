@@ -2,7 +2,8 @@ import {
   ExpressionActionTypes,
   ADD_SYMBOL,
   REMOVE_SYMBOL,
-  UPDATE_EXPRESSION
+  UPDATE_EXPRESSION,
+  CLEAR_EXPRESSION
 } from "./types";
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
@@ -51,6 +52,12 @@ export function updateExpression(expression: string): ExpressionActionTypes {
   };
 }
 
+export function clearExpression(): ExpressionActionTypes {
+  return {
+    type: CLEAR_EXPRESSION
+  };
+}
+
 export const handleExpressionEqualsResult = (): AppThunkAction<ExpressionActionTypes> => (
   dispatch: AppDispatch,
   getStore: () => RootState
@@ -59,4 +66,12 @@ export const handleExpressionEqualsResult = (): AppThunkAction<ExpressionActionT
   const result = store.result.result;
   dispatch(updateExpression(result));
   dispatch(updateResult(""));
+};
+
+export const handleClearExpression = (): AppThunkAction<ExpressionActionTypes> => {
+  return (dispatch: AppDispatch) => {
+    dispatch(clearExpression());
+    dispatch(updateResult(""));
+    dispatch(updateResultValidation(true));
+  };
 };

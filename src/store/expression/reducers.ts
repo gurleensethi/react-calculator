@@ -3,7 +3,8 @@ import {
   ExpressionActionTypes,
   ADD_SYMBOL,
   REMOVE_SYMBOL,
-  UPDATE_EXPRESSION
+  UPDATE_EXPRESSION,
+  CLEAR_EXPRESSION
 } from "./types";
 
 const initialState: ExpressionState = {
@@ -24,6 +25,9 @@ export function expressionReducer(
       };
     case UPDATE_EXPRESSION:
       return { value: action.expression };
+    case CLEAR_EXPRESSION: {
+      return { value: "" };
+    }
     default:
       return state;
   }

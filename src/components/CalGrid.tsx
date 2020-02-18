@@ -8,7 +8,8 @@ import { connect, ConnectedProps } from "react-redux";
 import { RootState, AppDispatch } from "../store";
 import {
   handleAddSymbol,
-  handleExpressionEqualsResult
+  handleExpressionEqualsResult,
+  handleClearExpression
 } from "../store/expression/actions";
 
 interface OwnProps {}
@@ -24,7 +25,8 @@ const mapStateToProps = (state: RootState, props: OwnProps) => {
 const mapDispatchToProps = (dispatch: AppDispatch, props: OwnProps) => {
   return {
     addSymbol: (symbol: string) => dispatch(handleAddSymbol(symbol)),
-    handleEqualsPress: () => dispatch(handleExpressionEqualsResult())
+    handleEqualsPress: () => dispatch(handleExpressionEqualsResult()),
+    handleACPress: () => dispatch(handleClearExpression())
   };
 };
 
@@ -44,6 +46,7 @@ class CalGrid extends React.Component<OwnProps & PropsFromRedux> {
   handleNumberClick = (symbol: string) => {
     switch (symbol) {
       case "AC":
+        this.props.handleACPress();
         break;
       case "x":
         this.props.addSymbol("*");
