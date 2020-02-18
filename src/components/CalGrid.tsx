@@ -16,7 +16,8 @@ interface OwnProps {}
 const mapStateToProps = (state: RootState, props: OwnProps) => {
   return {
     expression: state.expression.value,
-    result: state.result.result
+    result: state.result.result,
+    isResultValid: state.result.isValid
   };
 };
 
@@ -56,11 +57,11 @@ class CalGrid extends React.Component<OwnProps & PropsFromRedux> {
   };
 
   render() {
-    const { result, expression } = this.props;
+    const { result, expression, isResultValid } = this.props;
     return (
       <Container>
         <ExpressionContainer>
-          <ResultBox result={result} />
+          <ResultBox isValid={isResultValid}>{result}</ResultBox>
           <ExpressionBox expression={expression} />
         </ExpressionContainer>
         <NumContainer>
