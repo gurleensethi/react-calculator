@@ -12,6 +12,7 @@ import {
   handleClearExpression,
   handleRemoveSymbol
 } from "../store/expression/actions";
+import TopBar from "./TopBar";
 
 interface OwnProps {}
 
@@ -68,6 +69,7 @@ class CalGrid extends React.Component<OwnProps & PropsFromRedux> {
     const { result, expression, isResultValid } = this.props;
     return (
       <Container>
+        <TopBar />
         <ExpressionContainer>
           <ResultBox isValid={isResultValid}>{result}</ResultBox>
           <ExpressionBox expression={expression} />
